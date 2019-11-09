@@ -1,0 +1,55 @@
+entity Player {
+	firstName String required,
+    lastName String required
+}
+
+entity Club {
+	name String required,
+    defaultChampionshipName String,
+    defaultOneEventPrice Double,
+    defaultTwoEventsPrice Double,
+    defaultThreeEventsPrice Double,
+}
+
+entity Championship {
+	name String required,
+    year Integer,
+	oneEventPrice Double,
+    twoEventsPrice Double,
+    threeEventsPrice Double,
+}
+
+entity Participation {
+	singleEvent Boolean,
+    doubleEvent Boolean,
+    mixedEvent Boolean
+}
+
+entity BillLine {
+	amount Double
+}
+
+enum BillStatus {
+	CREATED, PAID
+}
+
+entity Bill {
+	status BillStatus,
+    amount Double,
+}
+
+relationship OneToOne {
+	BillLine{participation} to Participation
+}
+
+relationship ManyToOne {
+	Championship{club} to Club,
+    Participation{championship} to Championship,
+    Participation{player} to Player,
+    BillLine{bill} to Bill,
+    Bill{player} to Player
+}
+
+paginate all with pagination
+dto all with mapstruct
+service all with serviceImpl
