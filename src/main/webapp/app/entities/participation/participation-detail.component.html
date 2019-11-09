@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="participation">
+            <h2><span>Participation</span> {{participation.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Single Event</span></dt>
+                <dd>
+                    <span>{{participation.singleEvent}}</span>
+                </dd>
+                <dt><span>Double Event</span></dt>
+                <dd>
+                    <span>{{participation.doubleEvent}}</span>
+                </dd>
+                <dt><span>Mixed Event</span></dt>
+                <dd>
+                    <span>{{participation.mixedEvent}}</span>
+                </dd>
+                <dt><span>Championship</span></dt>
+                <dd>
+                    <div *ngIf="participation.championshipId">
+                        <a [routerLink]="['/championship', participation.championshipId, 'view']">{{participation.championshipId}}</a>
+                    </div>
+                </dd>
+                <dt><span>Player</span></dt>
+                <dd>
+                    <div *ngIf="participation.playerId">
+                        <a [routerLink]="['/player', participation.playerId, 'view']">{{participation.playerId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/participation', participation.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+{
+    "name": "Participation",
+    "fields": [
+        {
+            "fieldName": "singleEvent",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "doubleEvent",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "mixedEvent",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "championship",
+            "otherEntityRelationshipName": "participation",
+            "relationshipName": "championship",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "player",
+            "otherEntityRelationshipName": "participation",
+            "relationshipName": "player",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191109141951",
+    "entityTableName": "participation",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
