@@ -15,9 +15,15 @@
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "player",
-            "otherEntityRelationshipName": "bill",
+            "otherEntityRelationshipName": "bills",
             "relationshipName": "player",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "billLine",
+            "otherEntityRelationshipName": "bill",
+            "relationshipName": "lines"
         }
     ],
     "changelogDate": "20191109141953",

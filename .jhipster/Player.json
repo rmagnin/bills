@@ -16,7 +16,20 @@
             ]
         }
     ],
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "participation",
+            "otherEntityRelationshipName": "player",
+            "relationshipName": "participations"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "bill",
+            "otherEntityRelationshipName": "player",
+            "relationshipName": "bills"
+        }
+    ],
     "changelogDate": "20191109141948",
     "entityTableName": "player",
     "dto": "mapstruct",

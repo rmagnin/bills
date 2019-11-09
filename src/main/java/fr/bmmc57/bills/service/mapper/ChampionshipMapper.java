@@ -15,6 +15,8 @@ public interface ChampionshipMapper extends EntityMapper<ChampionshipDTO, Champi
     ChampionshipDTO toDto(Championship championship);
 
     @Mapping(source = "clubId", target = "club")
+    @Mapping(target = "participations", ignore = true)
+    @Mapping(target = "removeParticipations", ignore = true)
     Championship toEntity(ChampionshipDTO championshipDTO);
 
     default Championship fromId(Long id) {

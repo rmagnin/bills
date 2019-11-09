@@ -12,6 +12,9 @@ import org.mapstruct.*;
 public interface ClubMapper extends EntityMapper<ClubDTO, Club> {
 
 
+    @Mapping(target = "championships", ignore = true)
+    @Mapping(target = "removeChampionships", ignore = true)
+    Club toEntity(ClubDTO clubDTO);
 
     default Club fromId(Long id) {
         if (id == null) {

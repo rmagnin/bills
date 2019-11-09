@@ -12,6 +12,11 @@ import org.mapstruct.*;
 public interface PlayerMapper extends EntityMapper<PlayerDTO, Player> {
 
 
+    @Mapping(target = "participations", ignore = true)
+    @Mapping(target = "removeParticipations", ignore = true)
+    @Mapping(target = "bills", ignore = true)
+    @Mapping(target = "removeBills", ignore = true)
+    Player toEntity(PlayerDTO playerDTO);
 
     default Player fromId(Long id) {
         if (id == null) {

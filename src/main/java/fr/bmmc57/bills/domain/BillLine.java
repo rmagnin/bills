@@ -29,7 +29,7 @@ public class BillLine implements Serializable {
     private Participation participation;
 
     @ManyToOne
-    @JsonIgnoreProperties("billLines")
+    @JsonIgnoreProperties("lines")
     private Bill bill;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

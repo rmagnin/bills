@@ -18,14 +18,14 @@
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "championship",
-            "otherEntityRelationshipName": "participation",
+            "otherEntityRelationshipName": "participations",
             "relationshipName": "championship",
             "otherEntityField": "id"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "player",
-            "otherEntityRelationshipName": "participation",
+            "otherEntityRelationshipName": "participations",
             "relationshipName": "player",
             "otherEntityField": "id"
         }

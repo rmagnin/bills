@@ -15,6 +15,8 @@ public interface BillMapper extends EntityMapper<BillDTO, Bill> {
     BillDTO toDto(Bill bill);
 
     @Mapping(source = "playerId", target = "player")
+    @Mapping(target = "lines", ignore = true)
+    @Mapping(target = "removeLines", ignore = true)
     Bill toEntity(BillDTO billDTO);
 
     default Bill fromId(Long id) {

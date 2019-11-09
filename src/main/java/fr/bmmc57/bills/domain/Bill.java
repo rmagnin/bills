@@ -6,6 +6,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import fr.bmmc57.bills.domain.enumeration.BillStatus;
 
@@ -33,6 +35,10 @@ public class Bill implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("bills")
     private Player player;
+
+    @OneToMany(mappedBy = "bill")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<BillLine> lines = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -80,6 +86,31 @@ public class Bill implements Serializable {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public Set<BillLine> getLines() {
+        return lines;
+    }
+
+    public Bill lines(Set<BillLine> billLines) {
+        this.lines = billLines;
+        return this;
+    }
+
+    public Bill addLines(BillLine billLine) {
+        this.lines.add(billLine);
+        billLine.setBill(this);
+        return this;
+    }
+
+    public Bill removeLines(BillLine billLine) {
+        this.lines.remove(billLine);
+        billLine.setBill(null);
+        return this;
+    }
+
+    public void setLines(Set<BillLine> billLines) {
+        this.lines = billLines;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
