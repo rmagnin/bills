@@ -1,0 +1,82 @@
+<div>
+    <h2 id="page-heading">
+        <span>Participations</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-participation" [routerLink]="['/participation/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Participation
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="participations?.length === 0">
+        <span>No participations found</span>
+    </div>
+    <div class="table-responsive" *ngIf="participations?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="singleEvent"><span>Single Event</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="doubleEvent"><span>Double Event</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="mixedEvent"><span>Mixed Event</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="championshipId"><span>Championship</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="playerId"><span>Player</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let participation of participations ;trackBy: trackId">
+                <td><a [routerLink]="['/participation', participation.id, 'view' ]">{{participation.id}}</a></td>
+                <td>{{participation.singleEvent}}</td>
+                <td>{{participation.doubleEvent}}</td>
+                <td>{{participation.mixedEvent}}</td>
+                <td>
+                    <div *ngIf="participation.championshipId">
+                        <a [routerLink]="['/championship', participation.championshipId , 'view' ]" >{{participation.championshipId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="participation.playerId">
+                        <a [routerLink]="['/player', participation.playerId , 'view' ]" >{{participation.playerId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/participation', participation.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/participation', participation.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/participation', { outlets: { popup: participation.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="participations?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

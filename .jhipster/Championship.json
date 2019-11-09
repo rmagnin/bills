@@ -1,0 +1,47 @@
+{
+    "name": "Championship",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "year",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "oneEventPrice",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "twoEventsPrice",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "threeEventsPrice",
+            "fieldType": "Double"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "club",
+            "otherEntityRelationshipName": "championship",
+            "relationshipName": "club",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191109141950",
+    "entityTableName": "championship",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

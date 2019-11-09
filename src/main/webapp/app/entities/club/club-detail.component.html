@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="club">
+            <h2><span>Club</span> {{club.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Name</span></dt>
+                <dd>
+                    <span>{{club.name}}</span>
+                </dd>
+                <dt><span>Default Championship Name</span></dt>
+                <dd>
+                    <span>{{club.defaultChampionshipName}}</span>
+                </dd>
+                <dt><span>Default One Event Price</span></dt>
+                <dd>
+                    <span>{{club.defaultOneEventPrice}}</span>
+                </dd>
+                <dt><span>Default Two Events Price</span></dt>
+                <dd>
+                    <span>{{club.defaultTwoEventsPrice}}</span>
+                </dd>
+                <dt><span>Default Three Events Price</span></dt>
+                <dd>
+                    <span>{{club.defaultThreeEventsPrice}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/club', club.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

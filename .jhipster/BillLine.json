@@ -1,0 +1,36 @@
+{
+    "name": "BillLine",
+    "fields": [
+        {
+            "fieldName": "amount",
+            "fieldType": "Double"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "participation",
+            "otherEntityRelationshipName": "billLine",
+            "relationshipName": "participation",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "bill",
+            "otherEntityRelationshipName": "billLine",
+            "relationshipName": "bill",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191109141952",
+    "entityTableName": "bill_line",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

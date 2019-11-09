@@ -1,0 +1,39 @@
+{
+    "name": "Club",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "defaultChampionshipName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "defaultOneEventPrice",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "defaultTwoEventsPrice",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "defaultThreeEventsPrice",
+            "fieldType": "Double"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20191109141949",
+    "entityTableName": "club",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

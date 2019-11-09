@@ -1,0 +1,33 @@
+{
+    "name": "Bill",
+    "fields": [
+        {
+            "fieldName": "status",
+            "fieldType": "BillStatus",
+            "fieldValues": "CREATED,PAID"
+        },
+        {
+            "fieldName": "amount",
+            "fieldType": "Double"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "player",
+            "otherEntityRelationshipName": "bill",
+            "relationshipName": "player",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191109141953",
+    "entityTableName": "bill",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
