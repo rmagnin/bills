@@ -1,0 +1,46 @@
+{
+  "generator-jhipster": {
+    "applicationType": "monolith",
+    "gitCompany": "",
+    "baseName": "bills",
+    "packageName": "fr.bmmc57.bills",
+    "packageFolder": "fr/bmmc57/bills",
+    "serverPort": 8080,
+    "serviceDiscoveryType": false,
+    "authenticationType": "jwt",
+    "uaaBaseName": "../uaa",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "enableSwaggerCodegen": false,
+    "messageBroker": false,
+    "buildTool": "maven",
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "testFrameworks": [
+      "cucumber"
+    ],
+    "enableTranslation": false,
+    "nativeLanguage": "en",
+    "languages": [
+      "en"
+    ],
+    "clientFramework": "angularX",
+    "jhiPrefix": "jhi",
+    "jhipsterVersion": "6.4.1",
+    "jwtSecretKey": "MjA3YmM2NDg0NWI2MmYwMDEzODIwOGY4YWEwNjY1OTkzZDkwMDU5ZTdiZTE3MjFjZWU0NjNkMDZkMmQ0MDU5YWM1NjFlZGY4YmVlYjkxOTczZWY2ZjJiYTMwMzI5NzQ4ODViMzgxNmJkZTIxMjc2ODZiZjBjMzc5OWI1OWM4ZWE=",
+    "embeddableLaunchScript": false,
+    "clientTheme": "none",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "blueprints": []
+  },
+  "git-provider": "GitHub",
+  "git-company": "rmagnin",
+  "repository-name": "bills"
+}
