@@ -12,6 +12,7 @@ import org.mapstruct.*;
 public interface ChampionshipMapper extends EntityMapper<ChampionshipDTO, Championship> {
 
     @Mapping(source = "club.id", target = "clubId")
+    @Mapping(source = "club.name", target = "clubName")
     ChampionshipDTO toDto(Championship championship);
 
     @Mapping(source = "clubId", target = "club")

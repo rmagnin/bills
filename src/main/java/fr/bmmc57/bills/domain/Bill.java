@@ -4,8 +4,10 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,6 +26,10 @@ public class Bill implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
+    @Column(name = "creation_date", nullable = false)
+    private LocalDate creationDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
@@ -47,6 +53,19 @@ public class Bill implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public Bill creationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
+        return this;
+    }
+
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
     }
 
     public BillStatus getStatus() {
@@ -134,6 +153,7 @@ public class Bill implements Serializable {
     public String toString() {
         return "Bill{" +
             "id=" + getId() +
+            ", creationDate='" + getCreationDate() + "'" +
             ", status='" + getStatus() + "'" +
             ", amount=" + getAmount() +
             "}";

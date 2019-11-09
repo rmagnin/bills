@@ -22,6 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 import static fr.bmmc57.bills.web.rest.TestUtil.createFormattingConversionService;
@@ -36,6 +38,9 @@ import fr.bmmc57.bills.domain.enumeration.BillStatus;
  */
 @SpringBootTest(classes = BillsApp.class)
 public class BillResourceIT {
+
+    private static final LocalDate DEFAULT_CREATION_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_CREATION_DATE = LocalDate.now(ZoneId.systemDefault());
 
     private static final BillStatus DEFAULT_STATUS = BillStatus.CREATED;
     private static final BillStatus UPDATED_STATUS = BillStatus.PAID;
@@ -91,6 +96,7 @@ public class BillResourceIT {
      */
     public static Bill createEntity(EntityManager em) {
         Bill bill = new Bill()
+            .creationDate(DEFAULT_CREATION_DATE)
             .status(DEFAULT_STATUS)
             .amount(DEFAULT_AMOUNT);
         return bill;
@@ -103,6 +109,7 @@ public class BillResourceIT {
      */
     public static Bill createUpdatedEntity(EntityManager em) {
         Bill bill = new Bill()
+            .creationDate(UPDATED_CREATION_DATE)
             .status(UPDATED_STATUS)
             .amount(UPDATED_AMOUNT);
         return bill;
@@ -129,6 +136,7 @@ public class BillResourceIT {
         List<Bill> billList = billRepository.findAll();
         assertThat(billList).hasSize(databaseSizeBeforeCreate + 1);
         Bill testBill = billList.get(billList.size() - 1);
+        assertThat(testBill.getCreationDate()).isEqualTo(DEFAULT_CREATION_DATE);
         assertThat(testBill.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testBill.getAmount()).isEqualTo(DEFAULT_AMOUNT);
     }
@@ -156,6 +164,25 @@ public class BillResourceIT {
 
     @Test
     @Transactional
+    public void checkCreationDateIsRequired() throws Exception {
+        int databaseSizeBeforeTest = billRepository.findAll().size();
+        // set the field null
+        bill.setCreationDate(null);
+
+        // Create the Bill, which fails.
+        BillDTO billDTO = billMapper.toDto(bill);
+
+        restBillMockMvc.perform(post("/api/bills")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(billDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Bill> billList = billRepository.findAll();
+        assertThat(billList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllBills() throws Exception {
         // Initialize the database
         billRepository.saveAndFlush(bill);
@@ -165,6 +192,7 @@ public class BillResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(bill.getId().intValue())))
+            .andExpect(jsonPath("$.[*].creationDate").value(hasItem(DEFAULT_CREATION_DATE.toString())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT.doubleValue())));
     }
@@ -180,6 +208,7 @@ public class BillResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(bill.getId().intValue()))
+            .andExpect(jsonPath("$.creationDate").value(DEFAULT_CREATION_DATE.toString()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.amount").value(DEFAULT_AMOUNT.doubleValue()));
     }
@@ -205,6 +234,7 @@ public class BillResourceIT {
         // Disconnect from session so that the updates on updatedBill are not directly saved in db
         em.detach(updatedBill);
         updatedBill
+            .creationDate(UPDATED_CREATION_DATE)
             .status(UPDATED_STATUS)
             .amount(UPDATED_AMOUNT);
         BillDTO billDTO = billMapper.toDto(updatedBill);
@@ -218,6 +248,7 @@ public class BillResourceIT {
         List<Bill> billList = billRepository.findAll();
         assertThat(billList).hasSize(databaseSizeBeforeUpdate);
         Bill testBill = billList.get(billList.size() - 1);
+        assertThat(testBill.getCreationDate()).isEqualTo(UPDATED_CREATION_DATE);
         assertThat(testBill.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testBill.getAmount()).isEqualTo(UPDATED_AMOUNT);
     }

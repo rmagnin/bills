@@ -19,20 +19,22 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="creationDate"><span>Creation Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="status"><span>Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="amount"><span>Amount</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="playerId"><span>Player</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="playerLastName"><span>Player</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let bill of bills ;trackBy: trackId">
                 <td><a [routerLink]="['/bill', bill.id, 'view' ]">{{bill.id}}</a></td>
+                <td>{{bill.creationDate | date:'mediumDate'}}</td>
                 <td>{{bill.status}}</td>
                 <td>{{bill.amount}}</td>
                 <td>
                     <div *ngIf="bill.playerId">
-                        <a [routerLink]="['/player', bill.playerId , 'view' ]" >{{bill.playerId}}</a>
+                        <a [routerLink]="['/player', bill.playerId , 'view' ]" >{{bill.playerLastName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

@@ -2,6 +2,13 @@
     "name": "Bill",
     "fields": [
         {
+            "fieldName": "creationDate",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
             "fieldName": "status",
             "fieldType": "BillStatus",
             "fieldValues": "CREATED,PAID"
@@ -17,7 +24,7 @@
             "otherEntityName": "player",
             "otherEntityRelationshipName": "bills",
             "relationshipName": "player",
-            "otherEntityField": "id"
+            "otherEntityField": "lastName"
         },
         {
             "relationshipType": "one-to-many",

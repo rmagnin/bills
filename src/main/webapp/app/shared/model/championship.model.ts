@@ -7,6 +7,7 @@ export interface IChampionship {
   oneEventPrice?: number;
   twoEventsPrice?: number;
   threeEventsPrice?: number;
+  clubName?: string;
   clubId?: number;
   participations?: IParticipation[];
 }
@@ -19,6 +20,7 @@ export class Championship implements IChampionship {
     public oneEventPrice?: number,
     public twoEventsPrice?: number,
     public threeEventsPrice?: number,
+    public clubName?: string,
     public clubId?: number,
     public participations?: IParticipation[]
   ) {}

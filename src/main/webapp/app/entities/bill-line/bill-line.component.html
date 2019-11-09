@@ -19,6 +19,7 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="label"><span>Label</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="amount"><span>Amount</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="participationId"><span>Participation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="billId"><span>Bill</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -28,6 +29,7 @@
             <tbody>
             <tr *ngFor="let billLine of billLines ;trackBy: trackId">
                 <td><a [routerLink]="['/bill-line', billLine.id, 'view' ]">{{billLine.id}}</a></td>
+                <td>{{billLine.label}}</td>
                 <td>{{billLine.amount}}</td>
                 <td>
                     <div *ngIf="billLine.participationId">

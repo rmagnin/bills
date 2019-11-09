@@ -4,6 +4,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 
@@ -20,6 +21,10 @@ public class BillLine implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
+    @Column(name = "label", nullable = false)
+    private String label;
 
     @Column(name = "amount")
     private Double amount;
@@ -39,6 +44,19 @@ public class BillLine implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public BillLine label(String label) {
+        this.label = label;
+        return this;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     public Double getAmount() {
@@ -101,6 +119,7 @@ public class BillLine implements Serializable {
     public String toString() {
         return "BillLine{" +
             "id=" + getId() +
+            ", label='" + getLabel() + "'" +
             ", amount=" + getAmount() +
             "}";
     }

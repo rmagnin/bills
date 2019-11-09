@@ -36,6 +36,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = BillsApp.class)
 public class BillLineResourceIT {
 
+    private static final String DEFAULT_LABEL = "AAAAAAAAAA";
+    private static final String UPDATED_LABEL = "BBBBBBBBBB";
+
     private static final Double DEFAULT_AMOUNT = 1D;
     private static final Double UPDATED_AMOUNT = 2D;
 
@@ -87,6 +90,7 @@ public class BillLineResourceIT {
      */
     public static BillLine createEntity(EntityManager em) {
         BillLine billLine = new BillLine()
+            .label(DEFAULT_LABEL)
             .amount(DEFAULT_AMOUNT);
         return billLine;
     }
@@ -98,6 +102,7 @@ public class BillLineResourceIT {
      */
     public static BillLine createUpdatedEntity(EntityManager em) {
         BillLine billLine = new BillLine()
+            .label(UPDATED_LABEL)
             .amount(UPDATED_AMOUNT);
         return billLine;
     }
@@ -123,6 +128,7 @@ public class BillLineResourceIT {
         List<BillLine> billLineList = billLineRepository.findAll();
         assertThat(billLineList).hasSize(databaseSizeBeforeCreate + 1);
         BillLine testBillLine = billLineList.get(billLineList.size() - 1);
+        assertThat(testBillLine.getLabel()).isEqualTo(DEFAULT_LABEL);
         assertThat(testBillLine.getAmount()).isEqualTo(DEFAULT_AMOUNT);
     }
 
@@ -149,6 +155,25 @@ public class BillLineResourceIT {
 
     @Test
     @Transactional
+    public void checkLabelIsRequired() throws Exception {
+        int databaseSizeBeforeTest = billLineRepository.findAll().size();
+        // set the field null
+        billLine.setLabel(null);
+
+        // Create the BillLine, which fails.
+        BillLineDTO billLineDTO = billLineMapper.toDto(billLine);
+
+        restBillLineMockMvc.perform(post("/api/bill-lines")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(billLineDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<BillLine> billLineList = billLineRepository.findAll();
+        assertThat(billLineList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllBillLines() throws Exception {
         // Initialize the database
         billLineRepository.saveAndFlush(billLine);
@@ -158,6 +183,7 @@ public class BillLineResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(billLine.getId().intValue())))
+            .andExpect(jsonPath("$.[*].label").value(hasItem(DEFAULT_LABEL)))
             .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT.doubleValue())));
     }
     
@@ -172,6 +198,7 @@ public class BillLineResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(billLine.getId().intValue()))
+            .andExpect(jsonPath("$.label").value(DEFAULT_LABEL))
             .andExpect(jsonPath("$.amount").value(DEFAULT_AMOUNT.doubleValue()));
     }
 
@@ -196,6 +223,7 @@ public class BillLineResourceIT {
         // Disconnect from session so that the updates on updatedBillLine are not directly saved in db
         em.detach(updatedBillLine);
         updatedBillLine
+            .label(UPDATED_LABEL)
             .amount(UPDATED_AMOUNT);
         BillLineDTO billLineDTO = billLineMapper.toDto(updatedBillLine);
 
@@ -208,6 +236,7 @@ public class BillLineResourceIT {
         List<BillLine> billLineList = billLineRepository.findAll();
         assertThat(billLineList).hasSize(databaseSizeBeforeUpdate);
         BillLine testBillLine = billLineList.get(billLineList.size() - 1);
+        assertThat(testBillLine.getLabel()).isEqualTo(UPDATED_LABEL);
         assertThat(testBillLine.getAmount()).isEqualTo(UPDATED_AMOUNT);
     }
 

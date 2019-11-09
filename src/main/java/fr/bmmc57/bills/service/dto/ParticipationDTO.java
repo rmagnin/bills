@@ -18,7 +18,11 @@ public class ParticipationDTO implements Serializable {
 
     private Long championshipId;
 
+    private String championshipName;
+
     private Long playerId;
+
+    private String playerLastName;
 
     public Long getId() {
         return id;
@@ -60,12 +64,28 @@ public class ParticipationDTO implements Serializable {
         this.championshipId = championshipId;
     }
 
+    public String getChampionshipName() {
+        return championshipName;
+    }
+
+    public void setChampionshipName(String championshipName) {
+        this.championshipName = championshipName;
+    }
+
     public Long getPlayerId() {
         return playerId;
     }
 
     public void setPlayerId(Long playerId) {
         this.playerId = playerId;
+    }
+
+    public String getPlayerLastName() {
+        return playerLastName;
+    }
+
+    public void setPlayerLastName(String playerLastName) {
+        this.playerLastName = playerLastName;
     }
 
     @Override
@@ -97,7 +117,9 @@ public class ParticipationDTO implements Serializable {
             ", doubleEvent='" + isDoubleEvent() + "'" +
             ", mixedEvent='" + isMixedEvent() + "'" +
             ", championship=" + getChampionshipId() +
+            ", championship='" + getChampionshipName() + "'" +
             ", player=" + getPlayerId() +
+            ", player='" + getPlayerLastName() + "'" +
             "}";
     }
 }

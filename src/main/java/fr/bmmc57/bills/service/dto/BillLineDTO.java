@@ -1,4 +1,5 @@
 package fr.bmmc57.bills.service.dto;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -8,6 +9,9 @@ import java.util.Objects;
 public class BillLineDTO implements Serializable {
 
     private Long id;
+
+    @NotNull
+    private String label;
 
     private Double amount;
 
@@ -22,6 +26,14 @@ public class BillLineDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     public Double getAmount() {
@@ -73,6 +85,7 @@ public class BillLineDTO implements Serializable {
     public String toString() {
         return "BillLineDTO{" +
             "id=" + getId() +
+            ", label='" + getLabel() + "'" +
             ", amount=" + getAmount() +
             ", participation=" + getParticipationId() +
             ", bill=" + getBillId() +

@@ -12,7 +12,9 @@ import org.mapstruct.*;
 public interface ParticipationMapper extends EntityMapper<ParticipationDTO, Participation> {
 
     @Mapping(source = "championship.id", target = "championshipId")
+    @Mapping(source = "championship.name", target = "championshipName")
     @Mapping(source = "player.id", target = "playerId")
+    @Mapping(source = "player.lastName", target = "playerLastName")
     ParticipationDTO toDto(Participation participation);
 
     @Mapping(source = "championshipId", target = "championship")

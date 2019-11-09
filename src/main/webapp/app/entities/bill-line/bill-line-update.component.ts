@@ -27,6 +27,7 @@ export class BillLineUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
+    label: [null, [Validators.required]],
     amount: [],
     participationId: [],
     billId: []
@@ -83,6 +84,7 @@ export class BillLineUpdateComponent implements OnInit {
   updateForm(billLine: IBillLine) {
     this.editForm.patchValue({
       id: billLine.id,
+      label: billLine.label,
       amount: billLine.amount,
       participationId: billLine.participationId,
       billId: billLine.billId
@@ -107,6 +109,7 @@ export class BillLineUpdateComponent implements OnInit {
     return {
       ...new BillLine(),
       id: this.editForm.get(['id']).value,
+      label: this.editForm.get(['label']).value,
       amount: this.editForm.get(['amount']).value,
       participationId: this.editForm.get(['participationId']).value,
       billId: this.editForm.get(['billId']).value
