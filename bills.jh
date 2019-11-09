@@ -43,11 +43,11 @@ relationship OneToOne {
 }
 
 relationship ManyToOne {
-	Championship{club} to Club,
-    Participation{championship} to Championship,
-    Participation{player} to Player,
-    BillLine{bill} to Bill,
-    Bill{player} to Player
+	Championship{club} to Club{championships},
+    Participation{championship} to Championship{participations},
+    Participation{player} to Player{participations},
+    BillLine{bill} to Bill{lines},
+    Bill{player} to Player{bills}
 }
 
 paginate all with pagination
