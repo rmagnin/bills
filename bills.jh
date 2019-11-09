@@ -26,6 +26,7 @@ entity Participation {
 }
 
 entity BillLine {
+	label String required,
 	amount Double
 }
 
@@ -34,6 +35,7 @@ enum BillStatus {
 }
 
 entity Bill {
+	creationDate Date required,
 	status BillStatus,
     amount Double,
 }
@@ -43,11 +45,11 @@ relationship OneToOne {
 }
 
 relationship ManyToOne {
-	Championship{club} to Club{championships},
-    Participation{championship} to Championship{participations},
-    Participation{player} to Player{participations},
-    BillLine{bill} to Bill{lines},
-    Bill{player} to Player{bills}
+	Championship{club(name)} to Club{championships(name)},
+    Participation{championship(name)} to Championship{participations(player)},
+    Participation{player(lastName)} to Player{participations(championship)},
+    BillLine{bill} to Bill{lines(label)},
+    Bill{player(lastName)} to Player{bills(creationDate)}
 }
 
 paginate all with pagination
