@@ -7,6 +7,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Championship.
@@ -41,6 +43,10 @@ public class Championship implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("championships")
     private Club club;
+
+    @OneToMany(mappedBy = "championship")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Participation> participations = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -127,6 +133,31 @@ public class Championship implements Serializable {
 
     public void setClub(Club club) {
         this.club = club;
+    }
+
+    public Set<Participation> getParticipations() {
+        return participations;
+    }
+
+    public Championship participations(Set<Participation> participations) {
+        this.participations = participations;
+        return this;
+    }
+
+    public Championship addParticipations(Participation participation) {
+        this.participations.add(participation);
+        participation.setChampionship(this);
+        return this;
+    }
+
+    public Championship removeParticipations(Participation participation) {
+        this.participations.remove(participation);
+        participation.setChampionship(null);
+        return this;
+    }
+
+    public void setParticipations(Set<Participation> participations) {
+        this.participations = participations;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

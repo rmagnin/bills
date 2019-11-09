@@ -6,6 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Club.
@@ -36,6 +38,10 @@ public class Club implements Serializable {
 
     @Column(name = "default_three_events_price")
     private Double defaultThreeEventsPrice;
+
+    @OneToMany(mappedBy = "club")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Championship> championships = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -109,6 +115,31 @@ public class Club implements Serializable {
 
     public void setDefaultThreeEventsPrice(Double defaultThreeEventsPrice) {
         this.defaultThreeEventsPrice = defaultThreeEventsPrice;
+    }
+
+    public Set<Championship> getChampionships() {
+        return championships;
+    }
+
+    public Club championships(Set<Championship> championships) {
+        this.championships = championships;
+        return this;
+    }
+
+    public Club addChampionships(Championship championship) {
+        this.championships.add(championship);
+        championship.setClub(this);
+        return this;
+    }
+
+    public Club removeChampionships(Championship championship) {
+        this.championships.remove(championship);
+        championship.setClub(null);
+        return this;
+    }
+
+    public void setChampionships(Set<Championship> championships) {
+        this.championships = championships;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

@@ -25,7 +25,14 @@
             "fieldType": "Double"
         }
     ],
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "championship",
+            "otherEntityRelationshipName": "club",
+            "relationshipName": "championships"
+        }
+    ],
     "changelogDate": "20191109141949",
     "entityTableName": "club",
     "dto": "mapstruct",

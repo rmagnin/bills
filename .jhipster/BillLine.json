@@ -18,7 +18,7 @@
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "bill",
-            "otherEntityRelationshipName": "billLine",
+            "otherEntityRelationshipName": "lines",
             "relationshipName": "bill",
             "otherEntityField": "id"
         }

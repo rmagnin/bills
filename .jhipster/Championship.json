@@ -29,9 +29,15 @@
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "club",
-            "otherEntityRelationshipName": "championship",
+            "otherEntityRelationshipName": "championships",
             "relationshipName": "club",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "participation",
+            "otherEntityRelationshipName": "championship",
+            "relationshipName": "participations"
         }
     ],
     "changelogDate": "20191109141950",

@@ -48,6 +48,11 @@ public class CacheConfiguration {
             createCache(cm, fr.bmmc57.bills.domain.Participation.class.getName());
             createCache(cm, fr.bmmc57.bills.domain.BillLine.class.getName());
             createCache(cm, fr.bmmc57.bills.domain.Bill.class.getName());
+            createCache(cm, fr.bmmc57.bills.domain.Player.class.getName() + ".participations");
+            createCache(cm, fr.bmmc57.bills.domain.Player.class.getName() + ".bills");
+            createCache(cm, fr.bmmc57.bills.domain.Club.class.getName() + ".championships");
+            createCache(cm, fr.bmmc57.bills.domain.Championship.class.getName() + ".participations");
+            createCache(cm, fr.bmmc57.bills.domain.Bill.class.getName() + ".lines");
             // jhipster-needle-ehcache-add-entry
         };
     }

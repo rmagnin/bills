@@ -1,3 +1,5 @@
+import { IParticipation } from 'app/shared/model/participation.model';
+
 export interface IChampionship {
   id?: number;
   name?: string;
@@ -6,6 +8,7 @@ export interface IChampionship {
   twoEventsPrice?: number;
   threeEventsPrice?: number;
   clubId?: number;
+  participations?: IParticipation[];
 }
 
 export class Championship implements IChampionship {
@@ -16,6 +19,7 @@ export class Championship implements IChampionship {
     public oneEventPrice?: number,
     public twoEventsPrice?: number,
     public threeEventsPrice?: number,
-    public clubId?: number
+    public clubId?: number,
+    public participations?: IParticipation[]
   ) {}
 }
