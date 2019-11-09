@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(BillLineService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new BillLine(0, 0);
+      elemDefault = new BillLine(0, 'AAAAAAA', 0);
     });
 
     describe('Service methods', () => {
@@ -56,6 +56,7 @@ describe('Service Tests', () => {
       it('should update a BillLine', () => {
         const returnedFromService = Object.assign(
           {
+            label: 'BBBBBB',
             amount: 1
           },
           elemDefault
@@ -74,6 +75,7 @@ describe('Service Tests', () => {
       it('should return a list of BillLine', () => {
         const returnedFromService = Object.assign(
           {
+            label: 'BBBBBB',
             amount: 1
           },
           elemDefault

@@ -24,6 +24,8 @@ public class ChampionshipDTO implements Serializable {
 
     private Long clubId;
 
+    private String clubName;
+
     public Long getId() {
         return id;
     }
@@ -80,6 +82,14 @@ public class ChampionshipDTO implements Serializable {
         this.clubId = clubId;
     }
 
+    public String getClubName() {
+        return clubName;
+    }
+
+    public void setClubName(String clubName) {
+        this.clubName = clubName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -111,6 +121,7 @@ public class ChampionshipDTO implements Serializable {
             ", twoEventsPrice=" + getTwoEventsPrice() +
             ", threeEventsPrice=" + getThreeEventsPrice() +
             ", club=" + getClubId() +
+            ", club='" + getClubName() + "'" +
             "}";
     }
 }

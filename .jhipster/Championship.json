@@ -31,7 +31,7 @@
             "otherEntityName": "club",
             "otherEntityRelationshipName": "championships",
             "relationshipName": "club",
-            "otherEntityField": "id"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "one-to-many",

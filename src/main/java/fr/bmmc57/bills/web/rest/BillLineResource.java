@@ -18,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -52,7 +53,7 @@ public class BillLineResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/bill-lines")
-    public ResponseEntity<BillLineDTO> createBillLine(@RequestBody BillLineDTO billLineDTO) throws URISyntaxException {
+    public ResponseEntity<BillLineDTO> createBillLine(@Valid @RequestBody BillLineDTO billLineDTO) throws URISyntaxException {
         log.debug("REST request to save BillLine : {}", billLineDTO);
         if (billLineDTO.getId() != null) {
             throw new BadRequestAlertException("A new billLine cannot already have an ID", ENTITY_NAME, "idexists");
@@ -73,7 +74,7 @@ public class BillLineResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/bill-lines")
-    public ResponseEntity<BillLineDTO> updateBillLine(@RequestBody BillLineDTO billLineDTO) throws URISyntaxException {
+    public ResponseEntity<BillLineDTO> updateBillLine(@Valid @RequestBody BillLineDTO billLineDTO) throws URISyntaxException {
         log.debug("REST request to update BillLine : {}", billLineDTO);
         if (billLineDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

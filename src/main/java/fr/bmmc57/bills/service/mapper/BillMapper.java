@@ -12,6 +12,7 @@ import org.mapstruct.*;
 public interface BillMapper extends EntityMapper<BillDTO, Bill> {
 
     @Mapping(source = "player.id", target = "playerId")
+    @Mapping(source = "player.lastName", target = "playerLastName")
     BillDTO toDto(Bill bill);
 
     @Mapping(source = "playerId", target = "player")

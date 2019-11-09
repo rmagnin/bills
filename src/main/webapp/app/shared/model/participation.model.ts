@@ -3,7 +3,9 @@ export interface IParticipation {
   singleEvent?: boolean;
   doubleEvent?: boolean;
   mixedEvent?: boolean;
+  championshipName?: string;
   championshipId?: number;
+  playerLastName?: string;
   playerId?: number;
 }
 
@@ -13,7 +15,9 @@ export class Participation implements IParticipation {
     public singleEvent?: boolean,
     public doubleEvent?: boolean,
     public mixedEvent?: boolean,
+    public championshipName?: string,
     public championshipId?: number,
+    public playerLastName?: string,
     public playerId?: number
   ) {
     this.singleEvent = this.singleEvent || false;

@@ -1,4 +1,6 @@
 package fr.bmmc57.bills.service.dto;
+import java.time.LocalDate;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 import fr.bmmc57.bills.domain.enumeration.BillStatus;
@@ -10,6 +12,9 @@ public class BillDTO implements Serializable {
 
     private Long id;
 
+    @NotNull
+    private LocalDate creationDate;
+
     private BillStatus status;
 
     private Double amount;
@@ -17,12 +22,22 @@ public class BillDTO implements Serializable {
 
     private Long playerId;
 
+    private String playerLastName;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
     }
 
     public BillStatus getStatus() {
@@ -47,6 +62,14 @@ public class BillDTO implements Serializable {
 
     public void setPlayerId(Long playerId) {
         this.playerId = playerId;
+    }
+
+    public String getPlayerLastName() {
+        return playerLastName;
+    }
+
+    public void setPlayerLastName(String playerLastName) {
+        this.playerLastName = playerLastName;
     }
 
     @Override
@@ -74,9 +97,11 @@ public class BillDTO implements Serializable {
     public String toString() {
         return "BillDTO{" +
             "id=" + getId() +
+            ", creationDate='" + getCreationDate() + "'" +
             ", status='" + getStatus() + "'" +
             ", amount=" + getAmount() +
             ", player=" + getPlayerId() +
+            ", player='" + getPlayerLastName() + "'" +
             "}";
     }
 }

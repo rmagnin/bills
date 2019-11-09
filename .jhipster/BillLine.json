@@ -2,6 +2,13 @@
     "name": "BillLine",
     "fields": [
         {
+            "fieldName": "label",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
             "fieldName": "amount",
             "fieldType": "Double"
         }

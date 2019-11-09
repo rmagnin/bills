@@ -1,6 +1,8 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { take, map } from 'rxjs/operators';
+import * as moment from 'moment';
+import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { BillService } from 'app/entities/bill/bill.service';
 import { IBill, Bill } from 'app/shared/model/bill.model';
 import { BillStatus } from 'app/shared/model/enumerations/bill-status.model';
@@ -12,6 +14,7 @@ describe('Service Tests', () => {
     let httpMock: HttpTestingController;
     let elemDefault: IBill;
     let expectedResult;
+    let currentDate: moment.Moment;
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule]
@@ -20,13 +23,19 @@ describe('Service Tests', () => {
       injector = getTestBed();
       service = injector.get(BillService);
       httpMock = injector.get(HttpTestingController);
+      currentDate = moment();
 
-      elemDefault = new Bill(0, BillStatus.CREATED, 0);
+      elemDefault = new Bill(0, currentDate, BillStatus.CREATED, 0);
     });
 
     describe('Service methods', () => {
       it('should find an element', () => {
-        const returnedFromService = Object.assign({}, elemDefault);
+        const returnedFromService = Object.assign(
+          {
+            creationDate: currentDate.format(DATE_FORMAT)
+          },
+          elemDefault
+        );
         service
           .find(123)
           .pipe(take(1))
@@ -40,11 +49,17 @@ describe('Service Tests', () => {
       it('should create a Bill', () => {
         const returnedFromService = Object.assign(
           {
-            id: 0
+            id: 0,
+            creationDate: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
-        const expected = Object.assign({}, returnedFromService);
+        const expected = Object.assign(
+          {
+            creationDate: currentDate
+          },
+          returnedFromService
+        );
         service
           .create(new Bill(null))
           .pipe(take(1))
@@ -57,13 +72,19 @@ describe('Service Tests', () => {
       it('should update a Bill', () => {
         const returnedFromService = Object.assign(
           {
+            creationDate: currentDate.format(DATE_FORMAT),
             status: 'BBBBBB',
             amount: 1
           },
           elemDefault
         );
 
-        const expected = Object.assign({}, returnedFromService);
+        const expected = Object.assign(
+          {
+            creationDate: currentDate
+          },
+          returnedFromService
+        );
         service
           .update(expected)
           .pipe(take(1))
@@ -76,12 +97,18 @@ describe('Service Tests', () => {
       it('should return a list of Bill', () => {
         const returnedFromService = Object.assign(
           {
+            creationDate: currentDate.format(DATE_FORMAT),
             status: 'BBBBBB',
             amount: 1
           },
           elemDefault
         );
-        const expected = Object.assign({}, returnedFromService);
+        const expected = Object.assign(
+          {
+            creationDate: currentDate
+          },
+          returnedFromService
+        );
         service
           .query(expected)
           .pipe(

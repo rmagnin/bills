@@ -6,6 +6,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
+import * as moment from 'moment';
 import { JhiAlertService } from 'ng-jhipster';
 import { IBill, Bill } from 'app/shared/model/bill.model';
 import { BillService } from './bill.service';
@@ -20,9 +21,11 @@ export class BillUpdateComponent implements OnInit {
   isSaving: boolean;
 
   players: IPlayer[];
+  creationDateDp: any;
 
   editForm = this.fb.group({
     id: [],
+    creationDate: [null, [Validators.required]],
     status: [],
     amount: [],
     playerId: []
@@ -53,6 +56,7 @@ export class BillUpdateComponent implements OnInit {
   updateForm(bill: IBill) {
     this.editForm.patchValue({
       id: bill.id,
+      creationDate: bill.creationDate,
       status: bill.status,
       amount: bill.amount,
       playerId: bill.playerId
@@ -77,6 +81,7 @@ export class BillUpdateComponent implements OnInit {
     return {
       ...new Bill(),
       id: this.editForm.get(['id']).value,
+      creationDate: this.editForm.get(['creationDate']).value,
       status: this.editForm.get(['status']).value,
       amount: this.editForm.get(['amount']).value,
       playerId: this.editForm.get(['playerId']).value

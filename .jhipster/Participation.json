@@ -20,14 +20,14 @@
             "otherEntityName": "championship",
             "otherEntityRelationshipName": "participations",
             "relationshipName": "championship",
-            "otherEntityField": "id"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "player",
             "otherEntityRelationshipName": "participations",
             "relationshipName": "player",
-            "otherEntityField": "id"
+            "otherEntityField": "lastName"
         }
     ],
     "changelogDate": "20191109141951",

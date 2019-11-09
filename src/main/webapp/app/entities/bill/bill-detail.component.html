@@ -5,6 +5,10 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
+                <dt><span>Creation Date</span></dt>
+                <dd>
+                    <span>{{bill.creationDate}}</span>
+                </dd>
                 <dt><span>Status</span></dt>
                 <dd>
                     <span>{{bill.status}}</span>
@@ -16,7 +20,7 @@
                 <dt><span>Player</span></dt>
                 <dd>
                     <div *ngIf="bill.playerId">
-                        <a [routerLink]="['/player', bill.playerId, 'view']">{{bill.playerId}}</a>
+                        <a [routerLink]="['/player', bill.playerId, 'view']">{{bill.playerLastName}}</a>
                     </div>
                 </dd>
             </dl>

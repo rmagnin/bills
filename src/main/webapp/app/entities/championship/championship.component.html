@@ -24,7 +24,7 @@
             <th scope="col"  jhiSortBy="oneEventPrice"><span>One Event Price</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="twoEventsPrice"><span>Two Events Price</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="threeEventsPrice"><span>Three Events Price</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="clubId"><span>Club</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="clubName"><span>Club</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"></th>
             </tr>
             </thead>
@@ -38,7 +38,7 @@
                 <td>{{championship.threeEventsPrice}}</td>
                 <td>
                     <div *ngIf="championship.clubId">
-                        <a [routerLink]="['/club', championship.clubId , 'view' ]" >{{championship.clubId}}</a>
+                        <a [routerLink]="['/club', championship.clubId , 'view' ]" >{{championship.clubName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

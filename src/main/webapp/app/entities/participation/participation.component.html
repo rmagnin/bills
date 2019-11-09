@@ -22,8 +22,8 @@
             <th scope="col"  jhiSortBy="singleEvent"><span>Single Event</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="doubleEvent"><span>Double Event</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="mixedEvent"><span>Mixed Event</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="championshipId"><span>Championship</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="playerId"><span>Player</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="championshipName"><span>Championship</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="playerLastName"><span>Player</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"></th>
             </tr>
             </thead>
@@ -35,12 +35,12 @@
                 <td>{{participation.mixedEvent}}</td>
                 <td>
                     <div *ngIf="participation.championshipId">
-                        <a [routerLink]="['/championship', participation.championshipId , 'view' ]" >{{participation.championshipId}}</a>
+                        <a [routerLink]="['/championship', participation.championshipId , 'view' ]" >{{participation.championshipName}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="participation.playerId">
-                        <a [routerLink]="['/player', participation.playerId , 'view' ]" >{{participation.playerId}}</a>
+                        <a [routerLink]="['/player', participation.playerId , 'view' ]" >{{participation.playerLastName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

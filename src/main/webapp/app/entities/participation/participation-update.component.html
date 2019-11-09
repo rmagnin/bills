@@ -29,14 +29,14 @@
                     <label class="form-control-label" for="field_championship">Championship</label>
                     <select class="form-control" id="field_championship" name="championship" formControlName="championshipId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="championshipOption.id" *ngFor="let championshipOption of championships; trackBy: trackChampionshipById">{{championshipOption.id}}</option>
+                        <option [ngValue]="championshipOption.id" *ngFor="let championshipOption of championships; trackBy: trackChampionshipById">{{championshipOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_player">Player</label>
                     <select class="form-control" id="field_player" name="player" formControlName="playerId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="playerOption.id" *ngFor="let playerOption of players; trackBy: trackPlayerById">{{playerOption.id}}</option>
+                        <option [ngValue]="playerOption.id" *ngFor="let playerOption of players; trackBy: trackPlayerById">{{playerOption.lastName}}</option>
                     </select>
                 </div>
             </div>

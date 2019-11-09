@@ -20,13 +20,13 @@
                 <dt><span>Championship</span></dt>
                 <dd>
                     <div *ngIf="participation.championshipId">
-                        <a [routerLink]="['/championship', participation.championshipId, 'view']">{{participation.championshipId}}</a>
+                        <a [routerLink]="['/championship', participation.championshipId, 'view']">{{participation.championshipName}}</a>
                     </div>
                 </dd>
                 <dt><span>Player</span></dt>
                 <dd>
                     <div *ngIf="participation.playerId">
-                        <a [routerLink]="['/player', participation.playerId, 'view']">{{participation.playerId}}</a>
+                        <a [routerLink]="['/player', participation.playerId, 'view']">{{participation.playerLastName}}</a>
                     </div>
                 </dd>
             </dl>
